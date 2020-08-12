@@ -3,8 +3,10 @@
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/js-4zoq5e)
 
 <h2>Promise</h2>
-In a real world scenario, 
+
+<article>In a real world scenario, 
 for example when you call your friend they might ‘Oh sorry buddy i'm little busy right now , can i call you back ?’ this kind of messages we get on a daily basis.
+<section>
 Here your friend promised you something (calling you back). 
 So the, 
 Promise can be fulfilled(meaning he called you back)
@@ -12,15 +14,19 @@ Promise can be rejected (he informed you that he won't call you back)
 Promise can be in pending state (he didn’t call you).
 
 The above 3 scenarios will apply in programming too.
-
- Let's discuss ‘asynchronous’ first. 
+</section>
+<section>
+<h3> Let's discuss ‘asynchronous’ first.</h3> 
 Javascript is single threaded (meaning it executes your program one line at a time) in nature. Which means it executes your program in a synchronous fashion. 
-
+</section>
+</article>
 ‘Promise’ in javascript is like a normal constructor function.  Like below Car constructor function
-``function Car(year, make) {
+<div>
+```function Car(year, make) {
   this.year = year;
   this.make = make;
-}``
+}```
+</div>
 
 const honda = new Car(2020, 'Accord');
 
