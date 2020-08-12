@@ -1,0 +1,11 @@
+{
+  "name": "js-4zoq5e",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "jest": "^26.2.2"
+  }
+}
