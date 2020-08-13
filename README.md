@@ -1,4 +1,4 @@
-# js-4zoq5e
+# ES6 Promise Explained
 
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/js-4zoq5e)
 
