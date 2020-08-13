@@ -4,9 +4,9 @@
 
 <h2>Promise</h2>
 
-<article>In a real world scenario, 
+In a real world scenario, 
 for example when you call your friend they might ‘Oh sorry buddy i'm little busy right now , can i call you back ?’ this kind of messages we get on a daily basis.
-<section>
+
 Here your friend promised you something (calling you back). 
 So the, 
 Promise can be fulfilled(meaning he called you back)
@@ -14,15 +14,13 @@ Promise can be rejected (he informed you that he won't call you back)
 Promise can be in pending state (he didn’t call you).
 
 The above 3 scenarios will apply in programming too.
-</section>
-<section>
-<h3> Let's discuss ‘asynchronous’ first.</h3> 
+
+### Let's discuss ‘asynchronous’ first. 
 Asynchronous means running 2 or more things parallel.
 
 Javascript is single threaded (meaning it executes your program one line at a time) in nature. Which means it executes your program in a synchronous fashion. Javascript used `callbacks` to run code parallel (asynchronously)  
-</section>
-</article>
-<section>
+
+### Create our own Promise
 ‘Promise’ in javascript is like a normal constructor function.  
 
 Promise function has below methods to reuse:
@@ -32,11 +30,8 @@ Promise function has below methods to reuse:
   - handles when the promise is rejected. Returns a promise
 3) finally 
   - handles both fulfilled and rejected states. Returns a promise
-</section>
 
-<article>
-Lets create our own promise which should have all the above methods.
-For Creating our own Promise , 
+For Creating our own Promise , It should have all the above methods.
 lets follow below steps:
 1) Create a constructor function which accepts a callback
 2) constructor function should return a chainable promises
@@ -74,6 +69,7 @@ The below code will create an `randomNumber` instance from `MyPromise` and resol
 ```
 // This executor function will have access to onFulfilled and onRejected methods
 // You can write your own names for onFulfilled and onRejected methods
+
 const executor = (resolved, rejected) => {
   const num = Math.random() * 100;
   if (num > 50) {
