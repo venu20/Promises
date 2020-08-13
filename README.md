@@ -17,21 +17,54 @@ The above 3 scenarios will apply in programming too.
 </section>
 <section>
 <h3> Let's discuss ‘asynchronous’ first.</h3> 
-Javascript is single threaded (meaning it executes your program one line at a time) in nature. Which means it executes your program in a synchronous fashion. 
+Asynchronous means running 2 or more things parallel.
+
+Javascript is single threaded (meaning it executes your program one line at a time) in nature. Which means it executes your program in a synchronous fashion. Javascript used `callbacks` to run code parallel (asynchronously)  
 </section>
 </article>
-‘Promise’ in javascript is like a normal constructor function.  Like below Car constructor function
-<div>
-```function Car(year, make) {
-  this.year = year;
-  this.make = make;
-}```
-</div>
+<section>
+‘Promise’ in javascript is like a normal constructor function.  
 
-const honda = new Car(2020, 'Accord');
+Promise function has below methods to reuse:
+1) then
+  - handles when the promise is fulfilled. (Returns a promise)
+2) catch
+  - handles when the promise is rejected. Returns a promise
+3) finally 
+  - handles both fulfilled and rejected states. Returns a promise
+</section>
 
-For Creating our own Promise , lets follow below steps:
-Create a constructor function which accepts a callback
+<article>
+Lets create our own promise which should have all the above methods.
+For Creating our own Promise , 
+lets follow below steps:
+1) Create a constructor function which accepts a callback
+2) constructor function should return a chainable promises
+3) capability to resolve or reject
+
+```
+function MyPromise(cb) {
+  let successHandler;
+  let failureHandler;
+
+  // 'this' contains chainable promise
+  this.then = function (fulfilled, rejected) {
+    successHandler = fulfilled;
+    failureHandler = rejected || null;
+    return this;
+  }
+
+  const onFulfilled = function (value) {
+    successHandler(value);
+  };
+
+  const onRejected = function (reason) {
+    failureHandler(Error(`${reason}`));
+  };
+
+  setTimeout(() => {cb(onFulfilled, onRejected)}, 0);
+}
+```
 Instance should have access to ’then’ method to deal with success or failure scenarios
 ‘then’ method should accept 
 Let's start by creating a function for our own promise as ‘MyPromise’ which accepts a callback function and in the below code randomNumber has an instance of MyPromise function
@@ -39,6 +72,7 @@ Let's start by creating a function for our own promise as ‘MyPromise’ which 
 function MyPromise(cb) {
 
 }
+</article>
 const randomNumber = new MyPromise(callbackFn);
 
 randomNumber should access a ‘then’ method so let's create a `then` method  for our MyPromise

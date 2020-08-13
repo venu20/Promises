@@ -59,7 +59,7 @@ function MyPromise(cb) {
 }
 const randomNumber = new MyPromise(executor);
 // MyPromise {then: function}
-function MyPromise1(cb) {
+function MyPromise(cb) {
   let successCb;
   let failureCb;
 
@@ -67,6 +67,8 @@ function MyPromise1(cb) {
   this.then = function (fulfilled, rejected) {
     successCb = fulfilled;
     failureCb = rejected || null;
+    console.log('local this', this);
+    return this;
   }
 
   const onFulfilled = function (value) {
