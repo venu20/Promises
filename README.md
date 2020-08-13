@@ -116,6 +116,5 @@ static methods and instance methods
 - catch
 
 ### Important Notes
-<section style="color: #184185">
-When you return something from a then() callback, it's a bit magic. If you return a value, the next then() is called with that value. However, if you return something promise-like, the next then() waits on it, and is only called when that promise settles (succeeds/fails).
-</section>
+- When you return something from a then() callback, it's a bit magic. If you return a value, the next then() is called with that value. However, if you return something promise-like, the next then() waits on it, and is only called when that promise settles (succeeds/fails).
+- We can resolve promise only once.
