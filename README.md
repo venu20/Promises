@@ -51,7 +51,6 @@ function MyPromise(cb) {
   this.then = function (fulfilled, rejected) {
     successHandler = fulfilled;
     failureHandler = rejected || null;
-    return this;
   }
 
   const onFulfilled = function (value) {
@@ -65,97 +64,58 @@ function MyPromise(cb) {
   setTimeout(() => {cb(onFulfilled, onRejected)}, 0);
 }
 ```
-Instance should have access to ’then’ method to deal with success or failure scenarios
-‘then’ method should accept 
-Let's start by creating a function for our own promise as ‘MyPromise’ which accepts a callback function and in the below code randomNumber has an instance of MyPromise function
 
-function MyPromise(cb) {
+When we create an `instance` from `MyPromise`, It should have access to ’then’ method to deal with success or failure scenarios
+‘then’ method should accept a callback function.
 
-}
-</article>
-const randomNumber = new MyPromise(callbackFn);
 
-randomNumber should access a ‘then’ method so let's create a `then` method  for our MyPromise
-which accepts 2 callback functions 
-onFulfilled
-onRejected
-function MyPromise(cb) {
-  this.then = function (fulfilled, rejected) {
-    
+The below code will create an `randomNumber` instance from `MyPromise` and resolved value will go into the first callback function in `then` and second callback function will deal with `Rejection`
+
+```
+// This executor function will have access to onFulfilled and onRejected methods
+// You can write your own names for onFulfilled and onRejected methods
+const executor = (resolved, rejected) => {
+  const num = Math.random() * 100;
+  if (num > 50) {
+    resolved(num);
+  } else {
+    rejected(num);
   }
-}
-const randomNumber = new MyPromise(executor);
-// {then: function}
-
-
-
-
-the constructor should return a ‘then’ method because we have to process the resolved and rejected values
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function MyPromise(cb) {
-  let successCb;
-  let failureCb;
-
-  let that = this;
-  this.then = function (fulfilled, rejected) {
-    successCb = fulfilled;
-    failureCb = rejected || null;
-  }
-
-  const onFulfilled = function (value) {
-    successCb(value);
-  };
-
-  const onRejected = function (reason) {
-    failureCb(Error(`${reason}`));
-
-  };
-
-  setTimeout(() => {cb(onFulfilled, onRejected)}, 0);
-}
-
-
-
-Promise will be used for asynchronous operations such as API calls, event handling etc.
-Promise constructor will have static methods and instance methods
-Static methods such as .all, .race, .allSettled, .
-
-A promise will have below 4 states
-onFulfilled
-onRejected
-Pending
-
-
-We can create a promise instance using Promise constructor function like below
-
-
-const callback = (resolve, reject) => {
-resolve(50)
 };
+const randomNumber = new MyPromise(executor);
 
-// example variable will have access to `Promise` prototype methods
-// such as `then`, `finally`, `catch`
-const example = new Promise(callback);
-Promise is a constructor which takes 1 callback method where it has support for 2 parameters such as resolve, reject
-resolve and reject both are callback methods 
-On resolve 
+randomNumber.then((response) => {
+  console.log('Resolved Number', response);
+}, (rejection) => {
+  console.error('Rejected Number', rejection);
+});
+```
 
-On resolve, it deals with  success/fulfill of the promise and reject method will deal with failure/reject of the callback function.
 
+
+
+
+
+
+
+
+
+
+ES2015 `Promise` constructor will have access to 
+static methods and instance methods
+
+### Static methods
+- allSettled
+- all
+- race
+- any
+
+### Instance Methods
+- then
+- finally
+- catch
+
+### Important Notes
+<section style="color: #184185">
 When you return something from a then() callback, it's a bit magic. If you return a value, the next then() is called with that value. However, if you return something promise-like, the next then() waits on it, and is only called when that promise settles (succeeds/fails).
-
+</section>

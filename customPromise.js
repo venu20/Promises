@@ -16,7 +16,6 @@ const get = (api) => new Promise((resolve, reject) => {
       reject(Error(req.responseText));
     }
   }
-
   req.onerror = () => {
     reject(Error(req.responseText));
   }
@@ -49,29 +48,25 @@ const get = (api) => new Promise((resolve, reject) => {
 //     })
 //   })
 // }, sequence)
-
-const randomNumber = new MyPromise(executor);
 // MyPromise {then: function}
-// export function MyPromise(cb) {
-//   let successCb;
-//   let failureCb;
+export function MyPromise(cb) {
+  let successHandler;
+  let failureHandler;
 
-//   let that = this;
-//   this.then = function (fulfilled, rejected) {
-//     successCb = fulfilled;
-//     failureCb = rejected || null;
-//     console.log('local this', this);
-//     return this;
-//   }
+  let that = this;
+  this.then = function (fulfilled, rejected) {
+    successHandler = fulfilled;
+    failureHandler = rejected || null;
+  }
 
-//   const onFulfilled = function (value) {
-//     successCb(value);
-//   };
+  const onFulfilled = function (value) {
+    successHandler(value);
+  };
 
-//   const onRejected = function (reason) {
-//     failureCb(Error(`${reason}`));
+  const onRejected = function (reason) {
+    failureHandler(new Error(`${reason}`));
 
-//   };
+  };
 
-//   setTimeout(() => {cb(onFulfilled, onRejected)}, 0);
-// }
+  setTimeout(() => {cb(onFulfilled, onRejected)}, 0);
+}
